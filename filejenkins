@@ -11,12 +11,9 @@ node {
         archiveArtifacts artifacts: 'target/*.jar', 
         followSymlinks: false   
     }
-    step([$class: 'JUnitResultArchiver', checksName: '', stdioRetention: 'ALL', testResults: '**/target/surefire-reports/*.xml'])
-    sendmail(Completed)
-}
-
-def sendmail(status) {
-        emailext body: "Hey I am sending email", 
-        subject: "About build '${status}' job '${env.JOB_NAME}'",
-        to: "praveen_ashapure@epam.com"
+    post {
+        always {
+            step([$class: 'JUnitResultArchiver', checksName: '', stdioRetention: 'ALL', testResults: '**/target/surefire-reports/*.xml'])
+        }
+    }   
 }
