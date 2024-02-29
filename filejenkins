@@ -11,9 +11,8 @@ node {
         archiveArtifacts artifacts: 'target/*.jar', 
         followSymlinks: false   
     }
-    post {
-        always {
+    stage('post') {
             step([$class: 'JUnitResultArchiver', checksName: '', stdioRetention: 'ALL', testResults: '**/target/surefire-reports/*.xml'])
-        }
+        
     }   
 }
