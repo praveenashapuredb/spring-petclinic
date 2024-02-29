@@ -27,7 +27,7 @@ pipeline {
 
 		post {
 			always {
-		    	step([$class: 'JUnitResultArchiver', checksName: '', stdioRetention: 'ALL', testResults: '/target/surefire-reports/*.xml'])
+		    	step([$class: 'JUnitResultArchiver', checksName: '', stdioRetention: 'ALL', testResults: '**/target/surefire-reports/*.xml'])
 			}
 		}
 }
